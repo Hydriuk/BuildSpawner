@@ -9,8 +9,13 @@
     <Import_RootNamespace>BuildSpawner</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)API\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Services\" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\IBuildManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\IBuildStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\IThreadAdapter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BarricadeModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BuildModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\StructureModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\BuildManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\BuildStore.cs" />
   </ItemGroup>
 </Project>

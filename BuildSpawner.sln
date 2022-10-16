@@ -7,7 +7,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BuildSpawner", "BuildSpawne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketMod", "RocketMod\RocketMod.csproj", "{F27D15B3-8D87-46AF-B99D-C7AF8120490D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMod", "OpenMod\OpenMod.csproj", "{2E406332-C8E4-4BCC-81A6-DB37365E3169}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMod", "OpenMod\OpenMod.csproj", "{2E406332-C8E4-4BCC-81A6-DB37365E3169}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +31,8 @@ Global
 		SolutionGuid = {61E00100-5EC0-42A4-A8BF-F4C82CF87962}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		BuildSpawner\BuildSpawner.projitems*{2e406332-c8e4-4bcc-81a6-db37365e3169}*SharedItemsImports = 5
 		BuildSpawner\BuildSpawner.projitems*{5bc3f41b-df94-4d78-b723-61c194f902d6}*SharedItemsImports = 13
+		BuildSpawner\BuildSpawner.projitems*{f27d15b3-8d87-46af-b99d-c7af8120490d}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal
