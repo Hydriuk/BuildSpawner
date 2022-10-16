@@ -11,18 +11,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMod", "OpenMod\OpenMod.
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		OpenMod|Any CPU = OpenMod|Any CPU
+		RocketMod|Any CPU = RocketMod|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F27D15B3-8D87-46AF-B99D-C7AF8120490D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F27D15B3-8D87-46AF-B99D-C7AF8120490D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F27D15B3-8D87-46AF-B99D-C7AF8120490D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F27D15B3-8D87-46AF-B99D-C7AF8120490D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E406332-C8E4-4BCC-81A6-DB37365E3169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E406332-C8E4-4BCC-81A6-DB37365E3169}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E406332-C8E4-4BCC-81A6-DB37365E3169}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E406332-C8E4-4BCC-81A6-DB37365E3169}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F27D15B3-8D87-46AF-B99D-C7AF8120490D}.OpenMod|Any CPU.ActiveCfg = Debug|Any CPU
+		{F27D15B3-8D87-46AF-B99D-C7AF8120490D}.RocketMod|Any CPU.ActiveCfg = RocketMod|Any CPU
+		{F27D15B3-8D87-46AF-B99D-C7AF8120490D}.RocketMod|Any CPU.Build.0 = RocketMod|Any CPU
+		{2E406332-C8E4-4BCC-81A6-DB37365E3169}.OpenMod|Any CPU.ActiveCfg = OpenMod|Any CPU
+		{2E406332-C8E4-4BCC-81A6-DB37365E3169}.OpenMod|Any CPU.Build.0 = OpenMod|Any CPU
+		{2E406332-C8E4-4BCC-81A6-DB37365E3169}.RocketMod|Any CPU.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -16,7 +16,14 @@
     <InformationalVersion>0.1.0</InformationalVersion>
     <PackageVersion>0.1.0</PackageVersion>
     <AssemblyName>BuildSpawner.OpenMod</AssemblyName>
+    <Configurations>Debug;Release;OpenMod</Configurations>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Events\**" />
+    <EmbeddedResource Remove="Events\**" />
+    <None Remove="Events\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="LiteDB" Version="5.0.12" />
@@ -37,7 +44,6 @@
 
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Events\" />
   </ItemGroup>
 
   <Target Name="ChangeAliasesOfNugetRefs" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
