@@ -19,6 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LiteDB" Version="5.0.12" />
     <PackageReference Include="OpenMod.Unturned" Version="3.3.6+09f62798" />
     <PackageReference Include="Legacy2CPSWorkaround" Version="1.0.0">
       <PrivateAssets>All</PrivateAssets>
@@ -43,5 +44,7 @@
     <ItemGroup>
     </ItemGroup>
   </Target>
+
+  <Import Project="..\BuildSpawner\BuildSpawner.projitems" Label="Shared" />
 
 </Project>
