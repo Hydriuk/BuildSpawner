@@ -1,13 +1,19 @@
 ﻿using BuildSpawner.API;
 using BuildSpawner.Models;
+#if OPENMOD
+using Microsoft.Extensions.DependencyInjection;
+using OpenMod.API.Ioc;
+#endif
 using LiteDB;
-using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace BuildSpawner.Services
 {
+#if OPENMOD
+    [PluginServiceImplementation(Lifetime = ServiceLifetime.Singleton)]
+#endif
     public class BuildStore : IBuildStore
     {
         private readonly LiteDatabase _database;

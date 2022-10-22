@@ -1,5 +1,8 @@
 ﻿using BuildSpawner.API;
 using BuildSpawner.Models;
+#if OPENMOD
+using OpenMod.API.Ioc;
+#endif
 using SDG.Unturned;
 using System;
 using System.Collections.Generic;
@@ -9,6 +12,9 @@ using UnityEngine;
 
 namespace BuildSpawner.Services
 {
+#if OPENMOD
+    [PluginServiceImplementation]
+#endif
     public class BuildManager : IBuildManager
     {
         private IBuildStore _buildStore;
@@ -57,7 +63,7 @@ namespace BuildSpawner.Services
                 return false;
             }
 
-            PlaceBuild(build, userPosition, userRotation, shift, ownerId, groupId);
+            _threadAdapter.RunOnMainThread(() => PlaceBuild(build, userPosition, userRotation, shift, ownerId, groupId));
 
             return true;
         }
@@ -76,7 +82,7 @@ namespace BuildSpawner.Services
             Quaternion buildRotation = new Quaternion(build.UserRotation[0], build.UserRotation[1], build.UserRotation[2], build.UserRotation[3]);
 
             // Places the build using the position of the user who saved it
-            PlaceBuild(build, buildPosition, buildRotation, Vector3.zero, ownerId, groupId);
+            _threadAdapter.RunOnMainThread(() => PlaceBuild(build, buildPosition, buildRotation, Vector3.zero, ownerId, groupId));
 
             return true;
         }
@@ -255,7 +261,7 @@ namespace BuildSpawner.Services
                 _threadAdapter.RunOnMainThread(() =>
                 {
                     foreach (var structure in regionStructures)
-                        StructureManager.destroyStructure(structure, regionCoord.x, regionCoord.y, structure.model.position);
+                        StructureManager.destroyStructure(structure, regionCoord.x, regionCoord.y, Vector3.one * 100);
                 });
             }
 

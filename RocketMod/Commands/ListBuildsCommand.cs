@@ -1,11 +1,7 @@
 ﻿using Rocket.API;
 using Rocket.Unturned.Player;
 using SDG.Unturned;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace BuildSpawner.RocketMod.Commands
@@ -22,7 +18,7 @@ namespace BuildSpawner.RocketMod.Commands
 
         public List<string> Aliases => new List<string>() { "lbuilds" };
 
-        public List<string> Permissions => new List<string>();
+        public List<string> Permissions => new List<string>() { "buildspawner.admin" };
 
         public void Execute(IRocketPlayer caller, string[] command)
         {

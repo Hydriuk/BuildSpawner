@@ -1,11 +1,14 @@
 ﻿using BuildSpawner.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+#if OPENMOD
+using OpenMod.API.Ioc;
+#endif
 using UnityEngine;
 
 namespace BuildSpawner.API
 {
+#if OPENMOD
+    [Service]
+#endif
     public interface IBuildManager
     {
         /// <summary>
