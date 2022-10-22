@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BuildSpawner.Models
+﻿namespace BuildSpawner.Models
 {
     public class BarricadeModel
     {

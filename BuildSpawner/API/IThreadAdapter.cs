@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿#if OPENMOD
+using OpenMod.API.Ioc;
+#endif
+using System;
 
 namespace BuildSpawner.API
 {
+#if OPENMOD
+    [Service]
+#endif
     public interface IThreadAdapter
     {
         void RunOnMainThread(Action action);

@@ -1,11 +1,7 @@
 ﻿using Rocket.API;
 using Rocket.Unturned.Player;
 using SDG.Unturned;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace BuildSpawner.RocketMod.Commands
@@ -22,7 +18,7 @@ namespace BuildSpawner.RocketMod.Commands
 
         public List<string> Aliases => new List<string>() { "rbuild" };
 
-        public List<string> Permissions => new List<string>();
+        public List<string> Permissions => new List<string>() { "buildspawner.admin" };
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
@@ -35,40 +31,38 @@ namespace BuildSpawner.RocketMod.Commands
             }
 
             string buildingId = command[0];
-            Vector3 size;
-            Vector3 shift;
 
             if (buildingId.StartsWith("-"))
             {
-                ChatManager.serverSendMessage($"The building's name can't start with \"-\"", Color.red, toPlayer: player.SteamPlayer());
+                ChatManager.serverSendMessage("The build's name can't start with \"-\"", Color.red, toPlayer: player.SteamPlayer());
                 return;
             }
 
-            try
+            if (!float.TryParse(command[1], out float sizeX) ||
+                !float.TryParse(command[2], out float sizeY) ||
+                !float.TryParse(command[3], out float sizeZ))
             {
-                size = new Vector3(
-                    float.Parse(command[1]),
-                    float.Parse(command[2]),
-                    float.Parse(command[3])
-                );
-
-                if (command.Length == 7)
-                {
-                    shift = new Vector3(
-                        float.Parse(command[4]),
-                        float.Parse(command[5]),
-                        float.Parse(command[6])
-                    );
-                }
-                else
-                {
-                    shift = Vector3.zero;
-                }
-            }
-            catch (Exception)
-            {
-                ChatManager.serverSendMessage($"Coordinates must be decimal numbers", Color.red, toPlayer: player.SteamPlayer());
+                ChatManager.serverSendMessage("Sizes must be numbers", Color.red, toPlayer: player.SteamPlayer());
                 return;
+            }
+            Vector3 size = new Vector3(sizeX, sizeY, sizeZ);
+
+            Vector3 shift;
+            if (command.Length == 7)
+            {
+                if (!float.TryParse(command[4], out float shiftX) ||
+                    !float.TryParse(command[5], out float shiftY) ||
+                    !float.TryParse(command[6], out float shiftZ))
+                {
+                    ChatManager.serverSendMessage("Shifts must be numbers", Color.red, toPlayer: player.SteamPlayer());
+                    return;
+                }
+
+                shift = new Vector3(shiftX, shiftY, shiftZ);
+            }
+            else
+            {
+                shift = Vector3.zero;
             }
 
             Plugin.Instance.BuildManager.SaveBuild(

@@ -1,11 +1,7 @@
 ﻿using Rocket.API;
 using Rocket.Unturned.Player;
 using SDG.Unturned;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace BuildSpawner.RocketMod.Commands
@@ -16,13 +12,13 @@ namespace BuildSpawner.RocketMod.Commands
 
         public string Name => "spawnbuild";
 
-        public string Help => "";
+        public string Help => "Spawn a build";
 
         public string Syntax => " <id> [<shiftX> <shiftY> <shiftZ> | -origin | -o]";
 
         public List<string> Aliases => new List<string>() { "sbuild" };
 
-        public List<string> Permissions => new List<string>();
+        public List<string> Permissions => new List<string>() { "buildspawner.admin" };
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
@@ -36,7 +32,7 @@ namespace BuildSpawner.RocketMod.Commands
 
             string buildingId = command[0];
 
-            if(command.Length == 2)
+            if (command.Length == 2)
             {
                 if (!Plugin.Instance.BuildManager.PlaceBuild(buildingId, player.CSteamID.m_SteamID, player.SteamGroupID.m_SteamID))
                     ChatManager.serverSendMessage($"{buildingId} does not exist", Color.yellow, toPlayer: player.SteamPlayer());
@@ -45,11 +41,11 @@ namespace BuildSpawner.RocketMod.Commands
             }
 
             Vector3 shift;
-            if(command.Length == 4)
+            if (command.Length == 4)
             {
                 if (!float.TryParse(command[1], out float shiftX) || !float.TryParse(command[2], out float shiftY) || !float.TryParse(command[3], out float shiftZ))
                 {
-                    ChatManager.serverSendMessage($"Coordinates must be decimal numbers", Color.red, toPlayer: player.SteamPlayer());
+                    ChatManager.serverSendMessage("Coordinates must be decimal numbers", Color.red, toPlayer: player.SteamPlayer());
                     return;
                 }
 
@@ -59,7 +55,6 @@ namespace BuildSpawner.RocketMod.Commands
             {
                 shift = Vector3.zero;
             }
-
 
             bool buildingFound = Plugin.Instance.BuildManager.PlaceBuild(
                 buildingId,

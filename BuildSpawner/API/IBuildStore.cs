@@ -1,10 +1,15 @@
 ﻿using BuildSpawner.Models;
+#if OPENMOD
+using OpenMod.API.Ioc;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BuildSpawner.API
 {
+#if OPENMOD
+    [Service]
+#endif
     public interface IBuildStore : IDisposable
     {
         IEnumerable<string> GetBuidingsName();
