@@ -12,7 +12,7 @@ namespace BuildSpawner.RocketMod.Commands
 
         public string Name => "spawnbuild";
 
-        public string Help => "Spawn a build";
+        public string Help => "Spawn a build.";
 
         public string Syntax => " <id> [<shiftX> <shiftY> <shiftZ> | -origin | -o]";
 

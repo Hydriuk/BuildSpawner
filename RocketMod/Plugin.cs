@@ -12,12 +12,14 @@ namespace BuildSpawner.RocketMod
         public IBuildStore BuildStore { get; set; }
         public IThreadAdapter ThreadAdapter { get; set; }
         public IBuildManager BuildManager { get; set; }
+        public IEnvironmentProvider EnvironmentProvider { get; set; }
 
         protected override void Load()
         {
             Instance = this;
 
-            BuildStore = new BuildStore();
+            EnvironmentProvider = new EnvironmentProvider(this);
+            BuildStore = new BuildStore(EnvironmentProvider);
             ThreadAdapter = new ThreadAdapter();
             BuildManager = new BuildManager(BuildStore, ThreadAdapter);
         }

@@ -90,8 +90,10 @@
     <Compile Include="Commands\ListBuildsCommand.cs" />
     <Compile Include="Commands\RegisterBuildCommand.cs" />
     <Compile Include="Commands\SpawnBuildCommand.cs" />
+    <Compile Include="Commands\UnregisterBuildCommand.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\EnvironmentProvider.cs" />
     <Compile Include="Services\ThreadAdapter.cs" />
   </ItemGroup>
   <ItemGroup />
