@@ -12,7 +12,7 @@ namespace BuildSpawner.OpenMod.Commands
     [Command("registerbuild")]
     [CommandAlias("rbuild")]
     [CommandSyntax("<id> <sizeX> <sizeY> <sizeZ> [shiftX] [shiftY] [shiftZ]")]
-    [CommandDescription("Registers a build")]
+    [CommandDescription("Registers a build.")]
     [CommandActor(typeof(UnturnedUser))]
     public class RegisterBuildCommand : UnturnedCommand
     {

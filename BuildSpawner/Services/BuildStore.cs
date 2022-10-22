@@ -19,9 +19,9 @@ namespace BuildSpawner.Services
         private readonly LiteDatabase _database;
         private readonly ILiteCollection<BuildModel> _builds;
 
-        public BuildStore()
+        public BuildStore(IEnvironmentProvider environmentProvider)
         {
-            _database = new LiteDatabase("builds.db");
+            _database = new LiteDatabase(Path.Combine(environmentProvider.PluginDirectory, "builds.db"));
 
             _builds = _database.GetCollection<BuildModel>("Builds");
         }
@@ -44,6 +44,11 @@ namespace BuildSpawner.Services
         public void SaveBuild(BuildModel buildModel)
         {
             _builds.Upsert(buildModel);
+        }
+
+        public bool RemoveBuild(string id)
+        {
+            return _builds.Delete(id);
         }
     }
 }

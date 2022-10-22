@@ -11,7 +11,7 @@ namespace BuildSpawner.OpenMod.Commands
 {
     [Command("listbuilds")]
     [CommandAlias("lbuild")]
-    [CommandDescription("List all available build")]
+    [CommandDescription("List all available build.")]
     [CommandActor(typeof(UnturnedUser))]
     public class ListBuildsCommand : UnturnedCommand
     {

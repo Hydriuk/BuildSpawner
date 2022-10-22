@@ -12,7 +12,7 @@ namespace BuildSpawner.RocketMod.Commands
 
         public string Name => "listbuilds";
 
-        public string Help => "List all available builds";
+        public string Help => "List all available builds.";
 
         public string Syntax => string.Empty;
 

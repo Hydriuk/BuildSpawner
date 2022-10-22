@@ -13,7 +13,7 @@ namespace BuildSpawner.OpenMod.Commands
     [Command("spawnbuild")]
     [CommandAlias("sbuild")]
     [CommandSyntax("<id> [<shiftX> <shiftY> <shiftZ> | -origin | -o]")]
-    [CommandDescription("Spawn a build")]
+    [CommandDescription("Spawn a build.")]
     [CommandActor(typeof(UnturnedUser))]
     public class SpawnBuildCommand : UnturnedCommand
     {

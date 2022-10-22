@@ -15,5 +15,6 @@ namespace BuildSpawner.API
         IEnumerable<string> GetBuidingsName();
         void SaveBuild(BuildModel buildModel);
         BuildModel GetBuild(string id);
+        bool RemoveBuild(string id);
     }
 }
