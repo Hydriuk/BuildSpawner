@@ -12,7 +12,7 @@ namespace BuildSpawner.OpenMod.Commands
 {
     [Command("spawnbuild")]
     [CommandAlias("sbuild")]
-    [CommandSyntax("<id> [<shiftX> <shiftY> <shiftZ> | -origin | -o]")]
+    [CommandSyntax("<name> [<shiftX> <shiftY> <shiftZ>] [-origin | -o]")]
     [CommandDescription("Spawn a build.")]
     [CommandActor(typeof(UnturnedUser))]
     public class SpawnBuildCommand : UnturnedCommand
@@ -31,12 +31,12 @@ namespace BuildSpawner.OpenMod.Commands
             if (Context.Parameters.Length != 1 && Context.Parameters.Length != 2 && Context.Parameters.Length != 4)
                 throw new CommandWrongUsageException(Context);
 
-            string buildingId = Context.Parameters[0];
+            string buildName = Context.Parameters[0];
 
             if (Context.Parameters.Length == 2)
             {
-                if (!_buildManager.PlaceBuild(buildingId, user.SteamId.m_SteamID, user.Player.Player.channel.owner.playerID.group.m_SteamID))
-                    throw new UserFriendlyException($"{buildingId} does not exist");
+                if (!_buildManager.PlaceBuild(buildName, user.SteamId.m_SteamID, user.Player.Player.channel.owner.playerID.group.m_SteamID))
+                    throw new UserFriendlyException($"{buildName} does not exist");
 
                 return UniTask.CompletedTask;
             }
@@ -58,8 +58,8 @@ namespace BuildSpawner.OpenMod.Commands
                 shift = Vector3.zero;
             }
 
-            bool buildingFound = _buildManager.PlaceBuild(
-                buildingId,
+            bool buildFound = _buildManager.PlaceBuild(
+                buildName,
                 user.Player.Player.transform.position,
                 user.Player.Player.transform.rotation,
                 shift,
@@ -67,8 +67,8 @@ namespace BuildSpawner.OpenMod.Commands
                 user.Player.Player.channel.owner.playerID.group.m_SteamID
             );
 
-            if (!buildingFound)
-                throw new UserFriendlyException($"{buildingId} does not exist");
+            if (!buildFound)
+                throw new UserFriendlyException($"{buildName} does not exist");
 
             return UniTask.CompletedTask;
         }

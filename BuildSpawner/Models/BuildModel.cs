@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using LiteDB;
+using System.Collections.Generic;
 
 namespace BuildSpawner.Models
 {
     public class BuildModel
     {
-        public string Id { get; set; }
+        [BsonId]
+        public string Name { get; set; }
         public List<StructureModel> Structures { get; set; }
         public List<BarricadeModel> Barricades { get; set; }
         public float[] Size { get; set; }
@@ -12,9 +14,9 @@ namespace BuildSpawner.Models
         public float[] UserPosition { get; set; }
         public float[] UserRotation { get; set; }
 
-        public BuildModel(string id, List<StructureModel> structures, List<BarricadeModel> barricades, float[] size, float[] shift, float[] userPosition, float[] userRotation)
+        public BuildModel(string name, List<StructureModel> structures, List<BarricadeModel> barricades, float[] size, float[] shift, float[] userPosition, float[] userRotation)
         {
-            Id = id;
+            Name = name;
             Structures = structures;
             Barricades = barricades;
             Size = size;
@@ -25,7 +27,7 @@ namespace BuildSpawner.Models
 
         public BuildModel()
         {
-            Id = "";
+            Name = "";
             Structures = new List<StructureModel>();
             Barricades = new List<BarricadeModel>();
             Size = new float[3];

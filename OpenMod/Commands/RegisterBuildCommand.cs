@@ -11,7 +11,7 @@ namespace BuildSpawner.OpenMod.Commands
 {
     [Command("registerbuild")]
     [CommandAlias("rbuild")]
-    [CommandSyntax("<id> <sizeX> <sizeY> <sizeZ> [shiftX] [shiftY] [shiftZ]")]
+    [CommandSyntax("<name> <sizeX> <sizeY> <sizeZ> [shiftX] [shiftY] [shiftZ]")]
     [CommandDescription("Registers a build.")]
     [CommandActor(typeof(UnturnedUser))]
     public class RegisterBuildCommand : UnturnedCommand
@@ -30,9 +30,9 @@ namespace BuildSpawner.OpenMod.Commands
             if (Context.Parameters.Length != 4 && Context.Parameters.Length != 7)
                 throw new CommandWrongUsageException(Context);
 
-            string buildingId = Context.Parameters[0];
+            string buildName = Context.Parameters[0];
 
-            if (buildingId.StartsWith("-"))
+            if (buildName.StartsWith("-"))
                 throw new CommandWrongUsageException("The build's name can't start with \"-\"");
 
             if (!float.TryParse(Context.Parameters[1], out float sizeX) ||
@@ -61,7 +61,7 @@ namespace BuildSpawner.OpenMod.Commands
             }
 
             _buildManager.SaveBuild(
-                buildingId,
+                buildName,
                 user.Player.Player.transform.position,
                 user.Player.Player.transform.rotation,
                 size,

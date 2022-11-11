@@ -24,9 +24,9 @@ namespace BuildSpawner.RocketMod.Commands
         {
             UnturnedPlayer player = (UnturnedPlayer)caller;
 
-            string buildingList = Plugin.Instance.BuildManager.ListBuilds();
+            string buildList = Plugin.Instance.BuildManager.ListBuilds();
 
-            ChatManager.serverSendMessage($"Available buildings: {buildingList}", Color.green, toPlayer: player.SteamPlayer());
+            ChatManager.serverSendMessage($"Available builds: {buildList}", Color.green, toPlayer: player.SteamPlayer());
         }
     }
 }

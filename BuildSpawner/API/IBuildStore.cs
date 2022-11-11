@@ -12,9 +12,9 @@ namespace BuildSpawner.API
 #endif
     public interface IBuildStore : IDisposable
     {
-        IEnumerable<string> GetBuidingsName();
+        IEnumerable<string> GetBuildNames();
         void SaveBuild(BuildModel buildModel);
-        BuildModel GetBuild(string id);
-        bool RemoveBuild(string id);
+        BuildModel GetBuild(string buildName);
+        bool RemoveBuild(string buildName);
     }
 }

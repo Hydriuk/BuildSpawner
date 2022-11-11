@@ -14,7 +14,7 @@ namespace BuildSpawner.RocketMod.Commands
 
         public string Help => "Spawn a build.";
 
-        public string Syntax => " <id> [<shiftX> <shiftY> <shiftZ> | -origin | -o]";
+        public string Syntax => " <name> [<shiftX> <shiftY> <shiftZ>] [-origin | -o]";
 
         public List<string> Aliases => new List<string>() { "sbuild" };
 
@@ -30,12 +30,12 @@ namespace BuildSpawner.RocketMod.Commands
                 return;
             }
 
-            string buildingId = command[0];
+            string buildName = command[0];
 
             if (command.Length == 2)
             {
-                if (!Plugin.Instance.BuildManager.PlaceBuild(buildingId, player.CSteamID.m_SteamID, player.SteamGroupID.m_SteamID))
-                    ChatManager.serverSendMessage($"{buildingId} does not exist", Color.yellow, toPlayer: player.SteamPlayer());
+                if (!Plugin.Instance.BuildManager.PlaceBuild(buildName, player.CSteamID.m_SteamID, player.SteamGroupID.m_SteamID))
+                    ChatManager.serverSendMessage($"{buildName} does not exist", Color.yellow, toPlayer: player.SteamPlayer());
 
                 return;
             }
@@ -56,8 +56,8 @@ namespace BuildSpawner.RocketMod.Commands
                 shift = Vector3.zero;
             }
 
-            bool buildingFound = Plugin.Instance.BuildManager.PlaceBuild(
-                buildingId,
+            bool buildFound = Plugin.Instance.BuildManager.PlaceBuild(
+                buildName,
                 player.Player.transform.position,
                 player.Player.transform.rotation,
                 shift,
@@ -65,8 +65,8 @@ namespace BuildSpawner.RocketMod.Commands
                 player.SteamGroupID.m_SteamID
             );
 
-            if (!buildingFound)
-                ChatManager.serverSendMessage($"{buildingId} does not exist", Color.yellow, toPlayer: player.SteamPlayer());
+            if (!buildFound)
+                ChatManager.serverSendMessage($"{buildName} does not exist", Color.yellow, toPlayer: player.SteamPlayer());
         }
     }
 }
