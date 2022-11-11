@@ -14,7 +14,7 @@ namespace BuildSpawner.RocketMod.Commands
 
         public string Help => "Registers a build.";
 
-        public string Syntax => "<id> <sizeX> <sizeY> <sizeZ> [shiftX] [shiftY] [shiftZ]";
+        public string Syntax => "<name> <sizeX> <sizeY> <sizeZ> [shiftX] [shiftY] [shiftZ]";
 
         public List<string> Aliases => new List<string>() { "rbuild" };
 
@@ -30,9 +30,9 @@ namespace BuildSpawner.RocketMod.Commands
                 return;
             }
 
-            string buildingId = command[0];
+            string buildName = command[0];
 
-            if (buildingId.StartsWith("-"))
+            if (buildName.StartsWith("-"))
             {
                 ChatManager.serverSendMessage("The build's name can't start with \"-\"", Color.red, toPlayer: player.SteamPlayer());
                 return;
@@ -66,7 +66,7 @@ namespace BuildSpawner.RocketMod.Commands
             }
 
             Plugin.Instance.BuildManager.SaveBuild(
-                buildingId,
+                buildName,
                 player.Player.transform.position,
                 player.Player.transform.rotation,
                 size,

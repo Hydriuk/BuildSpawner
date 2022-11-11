@@ -14,7 +14,7 @@ namespace BuildSpawner.OpenMod.Commands
 {
     [Command("unregisterbuild")]
     [CommandAlias("unrbuild")]
-    [CommandSyntax("<id>")]
+    [CommandSyntax("<name>")]
     [CommandDescription("Removes a build. Cannot be undone.")]
     [CommandActor(typeof(UnturnedUser))]
     public class UnregisterBuildCommand : UnturnedCommand

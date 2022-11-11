@@ -19,7 +19,7 @@ namespace BuildSpawner.RocketMod.Commands
 
         public string Help => "Removes a build. Cannot be undone.";
 
-        public string Syntax => "<id>";
+        public string Syntax => "<name>";
 
         public List<string> Aliases => new List<string>() { "unrbuild" };
 

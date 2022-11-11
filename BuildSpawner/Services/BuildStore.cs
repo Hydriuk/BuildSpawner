@@ -18,12 +18,17 @@ namespace BuildSpawner.Services
     {
         private readonly LiteDatabase _database;
         private readonly ILiteCollection<BuildModel> _builds;
+        private readonly ILiteCollection<NameRef> _buildNames;
 
         public BuildStore(IEnvironmentProvider environmentProvider)
         {
             _database = new LiteDatabase(Path.Combine(environmentProvider.PluginDirectory, "builds.db"));
 
             _builds = _database.GetCollection<BuildModel>("Builds");
+            _builds.EnsureIndex(build => build.Name);
+
+            _buildNames = _database.GetCollection<NameRef>("BuildNames");
+            _buildNames.EnsureIndex(name => name.Name);
         }
 
         public void Dispose()
@@ -31,24 +36,38 @@ namespace BuildSpawner.Services
             _database.Dispose();
         }
 
-        public IEnumerable<string> GetBuidingsName()
+        public IEnumerable<string> GetBuildNames()
         {
-            return _builds.FindAll().Select(build => build.Id);
+            return _buildNames.FindAll().Select(name => name.Name);
         }
 
-        public BuildModel GetBuild(string id)
+        public BuildModel GetBuild(string buildName)
         {
-            return _builds.FindOne(build => build.Id == id);
+            return _builds.FindOne(build => build.Name == buildName);
         }
 
         public void SaveBuild(BuildModel buildModel)
         {
             _builds.Upsert(buildModel);
+
+            _buildNames.Upsert(new NameRef(buildModel.Name));
         }
 
-        public bool RemoveBuild(string id)
+        public bool RemoveBuild(string buildName)
         {
-            return _builds.Delete(id);
+            return _builds.DeleteMany(build => build.Name == buildName) >= 1  && 
+                _buildNames.DeleteMany(name => name.Name == buildName) >= 1;
+        }
+
+        private class NameRef
+        {
+            [BsonId]
+            public string Name { get; set; }
+
+            public NameRef(string name)
+            {
+                Name = name;
+            }
         }
     }
 }

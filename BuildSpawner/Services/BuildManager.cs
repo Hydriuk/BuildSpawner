@@ -26,11 +26,11 @@ namespace BuildSpawner.Services
             _threadAdapter = threadAdapter;
         }
 
-        public void SaveBuild(string buildId, Vector3 userPosition, Quaternion userRotation, Vector3 buildSize, Vector3 shift)
+        public void SaveBuild(string buildName, Vector3 userPosition, Quaternion userRotation, Vector3 buildSize, Vector3 shift)
         {
             BuildModel build = new BuildModel
             (
-                buildId,
+                buildName,
                 new List<StructureModel>(),
                 new List<BarricadeModel>(),
                 new float[3] { buildSize.x, buildSize.y, buildSize.z },
@@ -54,9 +54,9 @@ namespace BuildSpawner.Services
             _buildStore.SaveBuild(build);
         }
 
-        public bool PlaceBuild(string buildId, Vector3 userPosition, Quaternion userRotation, Vector3 shift, ulong ownerId = 0, ulong groupId = 0)
+        public bool PlaceBuild(string buildName, Vector3 userPosition, Quaternion userRotation, Vector3 shift, ulong ownerId = 0, ulong groupId = 0)
         {
-            BuildModel build = _buildStore.GetBuild(buildId);
+            BuildModel build = _buildStore.GetBuild(buildName);
 
             if (build is null)
             {
@@ -68,9 +68,9 @@ namespace BuildSpawner.Services
             return true;
         }
 
-        public bool PlaceBuild(string buildId, ulong ownerId = 0, ulong groupId = 0)
+        public bool PlaceBuild(string buildName, ulong ownerId = 0, ulong groupId = 0)
         {
-            BuildModel build = _buildStore.GetBuild(buildId);
+            BuildModel build = _buildStore.GetBuild(buildName);
 
             if (build is null)
             {
@@ -89,7 +89,7 @@ namespace BuildSpawner.Services
 
         public string ListBuilds()
         {
-            var buildNames = _buildStore.GetBuidingsName();
+            var buildNames = _buildStore.GetBuildNames();
 
             StringBuilder sb = new StringBuilder();
 

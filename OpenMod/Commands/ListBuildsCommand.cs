@@ -24,9 +24,9 @@ namespace BuildSpawner.OpenMod.Commands
 
         protected override UniTask OnExecuteAsync()
         {
-            string buildingList = _buildManager.ListBuilds();
+            string buildList = _buildManager.ListBuilds();
 
-            Context.Actor.PrintMessageAsync($"Available buildings: {buildingList}", Color.Green);
+            Context.Actor.PrintMessageAsync($"Available builds: {buildList}", Color.Green);
 
             return UniTask.CompletedTask;
         }
