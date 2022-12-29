@@ -30,8 +30,9 @@ namespace BuildSpawner.API
         /// <param name="shift"> Shift of the build </param>
         /// <param name="ownerId"> Owner of the build </param>
         /// <param name="groupId"> Group of the build </param>
+        /// <param name="replace"> Remove structures in area </param>
         /// <returns> True if the build was found. Otherwise false </returns>
-        bool PlaceBuild(string buildName, Vector3 userPosition, Quaternion userRotation, Vector3 shift, ulong ownerId = 0, ulong groupId = 0);
+        bool PlaceBuild(string buildName, Vector3 userPosition, Quaternion userRotation, Vector3 shift, ulong ownerId, ulong groupId, bool replace);
 
         /// <summary>
         /// Place a build on its original position
@@ -39,19 +40,21 @@ namespace BuildSpawner.API
         /// <param name="buildName"> Name of the build to place </param>
         /// <param name="ownerId"> Owner of the build </param>
         /// <param name="groupId"> Group of the build </param>
+        /// <param name="replace"> Remove structures in area </param>
         /// <returns> True if the build was found. Otherwise false </returns>
-        bool PlaceBuild(string buildName, ulong ownerId = 0, ulong groupId = 0);
+        bool PlaceBuild(string buildName, ulong ownerId, ulong groupId, bool replace);
 
         /// <summary>
         /// Places a build from a given position
         /// </summary>
-        /// <param name="build"></param>
-        /// <param name="userPosition"></param>
-        /// <param name="userRotation"></param>
-        /// <param name="shift"></param>
-        /// <param name="ownerId"></param>
-        /// <param name="groupId"></param>
-        void PlaceBuild(BuildModel build, Vector3 userPosition, Quaternion userRotation, Vector3 shift, ulong ownerId = 0, ulong groupId = 0);
+        /// <param name="build"> The build to place </param>
+        /// <param name="userPosition"> Position from which to place the build </param>
+        /// <param name="userRotation"> Rotation of the build </param>
+        /// <param name="shift"> Shift of the build </param>
+        /// <param name="ownerId"> Owner of the build </param>
+        /// <param name="groupId"> Group of the build </param>
+        /// <param name="replace"> Remove structures in area </param>
+        void PlaceBuild(BuildModel build, Vector3 userPosition, Quaternion userRotation, Vector3 shift, ulong ownerId, ulong groupId, bool replace);
 
         /// <summary>
         /// List all available builds

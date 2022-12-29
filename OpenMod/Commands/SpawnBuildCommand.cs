@@ -13,7 +13,7 @@ namespace BuildSpawner.OpenMod.Commands
 {
     [Command("spawnbuild")]
     [CommandAlias("sbuild")]
-    [CommandSyntax("<name> [<shiftX> <shiftY> <shiftZ>] [-o] [-p <player>] [-pg <player>]")]
+    [CommandSyntax("<name> [<shiftX> <shiftY> <shiftZ>] [-o] [-p <player>] [-pg <player>] [-r]")]
     [CommandDescription("Spawn a build.")]
     [CommandActor(typeof(UnturnedUser))]
     public class SpawnBuildCommand : UnturnedCommand
@@ -50,6 +50,7 @@ namespace BuildSpawner.OpenMod.Commands
             }
 
             bool origin = false;
+            bool replace = false;
             CSteamID playerId = CSteamID.Nil;
             CSteamID groupId = CSteamID.Nil;
             while (i < Context.Parameters.Length)
@@ -58,6 +59,13 @@ namespace BuildSpawner.OpenMod.Commands
                 if (Context.Parameters[i] == "-origin" || Context.Parameters[i] == "-o")
                 {
                     origin = true;
+                    i++;
+                }
+
+                // Parse replace
+                else if (Context.Parameters[i] == "-replace" || Context.Parameters[i] == "-r")
+                {
+                    replace = true;
                     i++;
                 }
 
@@ -92,6 +100,8 @@ namespace BuildSpawner.OpenMod.Commands
                         i++;
                     }
                 }
+
+                // Wrong Syntax
                 else
                 {
                     throw new CommandWrongUsageException(Context);
@@ -104,7 +114,7 @@ namespace BuildSpawner.OpenMod.Commands
 
             if (origin)
             {
-                if (!_buildManager.PlaceBuild(buildName, playerId.m_SteamID, groupId.m_SteamID))
+                if (!_buildManager.PlaceBuild(buildName, playerId.m_SteamID, groupId.m_SteamID, replace))
                     throw new UserFriendlyException($"{buildName} does not exist");
 
                 return UniTask.CompletedTask;
@@ -122,7 +132,8 @@ namespace BuildSpawner.OpenMod.Commands
                 user.Player.Player.transform.rotation,
                 shift,
                 playerId.m_SteamID,
-                groupId.m_SteamID
+                groupId.m_SteamID,
+                replace
             );
 
             if (!buildFound)
