@@ -54,7 +54,7 @@ namespace BuildSpawner.Services
             _buildStore.SaveBuild(build);
         }
 
-        public bool PlaceBuild(string buildName, Vector3 userPosition, Quaternion userRotation, Vector3 shift, ulong ownerId = 0, ulong groupId = 0)
+        public bool PlaceBuild(string buildName, Vector3 userPosition, Quaternion userRotation, Vector3 shift, ulong ownerId, ulong groupId, bool replace)
         {
             BuildModel build = _buildStore.GetBuild(buildName);
 
@@ -63,12 +63,12 @@ namespace BuildSpawner.Services
                 return false;
             }
 
-            _threadAdapter.RunOnMainThread(() => PlaceBuild(build, userPosition, userRotation, shift, ownerId, groupId));
+            _threadAdapter.RunOnMainThread(() => PlaceBuild(build, userPosition, userRotation, shift, ownerId, groupId, replace));
 
             return true;
         }
 
-        public bool PlaceBuild(string buildName, ulong ownerId = 0, ulong groupId = 0)
+        public bool PlaceBuild(string buildName, ulong ownerId, ulong groupId, bool replace)
         {
             BuildModel build = _buildStore.GetBuild(buildName);
 
@@ -82,7 +82,7 @@ namespace BuildSpawner.Services
             Quaternion buildRotation = new Quaternion(build.UserRotation[0], build.UserRotation[1], build.UserRotation[2], build.UserRotation[3]);
 
             // Places the build using the position of the user who saved it
-            _threadAdapter.RunOnMainThread(() => PlaceBuild(build, buildPosition, buildRotation, Vector3.zero, ownerId, groupId));
+            _threadAdapter.RunOnMainThread(() => PlaceBuild(build, buildPosition, buildRotation, Vector3.zero, ownerId, groupId, replace));
 
             return true;
         }
@@ -109,7 +109,7 @@ namespace BuildSpawner.Services
             return sb.ToString();
         }
 
-        public void PlaceBuild(BuildModel build, Vector3 userPosition, Quaternion userRotation, Vector3 shift, ulong ownerId = 0, ulong groupId = 0)
+        public void PlaceBuild(BuildModel build, Vector3 userPosition, Quaternion userRotation, Vector3 shift, ulong ownerId, ulong groupId, bool replace)
         {
             // Adds the given shift and the shift of the build when it was saved
             Vector3 buildShift = new Vector3(build.Shift[0], build.Shift[1], build.Shift[2]);
@@ -120,10 +120,13 @@ namespace BuildSpawner.Services
             Vector3 buildCenter = GetBuildCenter(userPosition, userRotation, buildSize, shift);
 
             // Removes structures and barricades from the build zone
-            List<RegionCoordinate> regions = new List<RegionCoordinate>();
-            Regions.getRegionsInRadius(buildCenter, Math.Max(buildSize.x, buildSize.z) * 2, regions);
-            PopStructures(regions, buildCenter, buildSize, userRotation);
-            PopBarricades(regions, buildCenter, buildSize, userRotation);
+            if(replace)
+            {
+                List<RegionCoordinate> regions = new List<RegionCoordinate>();
+                Regions.getRegionsInRadius(buildCenter, Math.Max(buildSize.x, buildSize.z) * 2, regions);
+                PopStructures(regions, buildCenter, buildSize, userRotation);
+                PopBarricades(regions, buildCenter, buildSize, userRotation);
+            }
 
             // Places all structures of the build
             foreach (var structureModel in build.Structures)
